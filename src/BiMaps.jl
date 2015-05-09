@@ -36,7 +36,11 @@ function show{L,R}(io::IO, bimap::BiMap{L,R})
     println(io, "BiMap{$L,$R} with $n ", n == 1 ? "entry" : "entries")
     for lkey in keys(bimap.left.left)
         rkey = bimap.left[lkey]
-        println(io, "  $lkey <=> $rkey")
+        write(io, "  ")
+        show(io, lkey)
+        write(io, " <=> ")
+        show(io, rkey)
+        write(io, '\n')
     end
 end
 

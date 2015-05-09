@@ -4,6 +4,8 @@
 
 BiMaps.jl is a pakcage for bijective mapping.
 
+## Synopsis
+
 ```julia
 using BiMaps
 
