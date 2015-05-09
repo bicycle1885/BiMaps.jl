@@ -14,6 +14,12 @@ getindex(bimap::BiMapInternal{false}, rkey) = bimap.right[rkey]
 
 function setindex!(bimap::BiMapInternal{true}, rkey, lkey)
     # TODO: atomic
+    if haskey(bimap.left, lkey)
+        delete!(bimap.right, bimap.left[lkey])
+    end
+    if haskey(bimap.right, rkey)
+        delete!(bimap.left, bimap.right[rkey])
+    end
     bimap.left[lkey] = rkey
     bimap.right[rkey] = lkey
     rkey
@@ -21,6 +27,12 @@ end
 
 function setindex!(bimap::BiMapInternal{false}, lkey, rkey)
     # TODO: atomic
+    if haskey(bimap.left, lkey)
+        delete!(bimap.right, bimap.left[lkey])
+    end
+    if haskey(bimap.right, rkey)
+        delete!(bimap.left, bimap.right[rkey])
+    end
     bimap.left[lkey] = rkey
     bimap.right[rkey] = lkey
     lkey

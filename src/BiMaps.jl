@@ -20,6 +20,14 @@ type BiMap{L,R}
     end
 end
 
+function BiMap{L,R}(pairs::AbstractArray{(L,R)})
+    bimap = BiMap{L,R}()
+    for (lkey, rkey) in pairs
+        bimap.left[lkey] = rkey
+    end
+    bimap
+end
+
 length(bimap::BiMap) = length(bimap.left)
 isempty(bimap::BiMap) = isempty(bimap.left)
 
